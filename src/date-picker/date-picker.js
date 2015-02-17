@@ -5,7 +5,7 @@
 
 
 angular.module('ngMaterial.components.datePicker', ['ngMaterial'])
-.controller('mdcDatePickerController', function ($scope, $timeout, $mdDialog, model, locale, mdTheme) {
+.controller('mdcDatePickerController', function ($scope, $timeout, $mdDialog, $document, model, locale, mdTheme) {
     function checkLocale(locale) {
       if (!locale) {
         return (navigator.language !== null ? navigator.language : navigator.browserLanguage).split('_')[0].split('-')[0] || 'en';
@@ -88,18 +88,15 @@ angular.module('ngMaterial.components.datePicker', ['ngMaterial'])
       generateCalendar();
     };
     $scope.displayYearSelection = function () {
-      //TODO: This requires JQuery and must be rewritten
-      var calendarHeight = angular.element('.mdc-date-picker__calendar').outerHeight(),
-        $yearSelector = angular.element('.mdc-date-picker__year-selector');
-
-      $yearSelector.css({height: calendarHeight});
+      var calendarHeight = $document[0].getElementsByClassName('mdc-date-picker__calendar')[0].offsetHeight;
+      var yearSelectorElement = $document[0].getElementsByClassName('mdc-date-picker__year-selector')[0];
+      yearSelectorElement.style.height = calendarHeight + 'px';
 
       $scope.yearSelection = true;
 
       $timeout(function () {
-        var $activeYear = angular.element('.mdc-date-picker__year--is-active');
-
-        $yearSelector.scrollTop($yearSelector.scrollTop() + $activeYear.position().top - $yearSelector.height() / 2 + $activeYear.height() / 2);
+        var activeYearElement = $document[0].getElementsByClassName('mdc-date-picker__year--is-active')[0];
+        yearSelectorElement.scrollTop = yearSelectorElement.scrollTop + activeYearElement.offsetTop - yearSelectorElement.offsetHeight / 2 + activeYearElement.offsetHeight / 2;
       });
     };
 
