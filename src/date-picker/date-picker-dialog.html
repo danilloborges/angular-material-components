@@ -16,13 +16,13 @@
       <!-- Calendar -->
       <div class="mdc-date-picker__calendar" ng-if="!yearSelection">
         <div class="mdc-date-picker__nav">
-          <md-button class="md-fab md-primary" ng-click="previousMonth()">
+          <md-button class="md-fab md-primary" aria-label="Previous month" ng-click="previousMonth()">
             <i class="mdi mdi-chevron-left"></i>
           </md-button>
 
           <span>{{ activeDate.format('MMMM YYYY') }}</span>
 
-          <md-button class="md-fab md-primary" ng-click="nextMonth()">
+          <md-button class="md-fab md-primary" arial-label="Next month" ng-click="nextMonth()">
             <i class="mdi mdi-chevron-right"></i>
           </md-button>
         </div>
