@@ -21,13 +21,6 @@
     "dist/angular-material-components.js",
     "dist/angular-material-components.css"
   ],
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
   "scripts": {
     "test": "gulp test"
   },

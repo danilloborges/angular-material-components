@@ -1,0 +1,12 @@
+**/.*
+*.tgz
+*.zip
+*.iml
+Gulpfile.js
+node_modules
+bower_components
+test
+tests
+demo
+lumX
+material
