@@ -1,16 +1,16 @@
-<md-dialog class="mdc-date-picker">
+<md-dialog class="mdc-date-picker" style="max-width: 90%; max-height: 90%">
     <!-- Date picker -->
     <div md-theme="{{mdTheme}}">
       <!-- Current day of week -->
       <md-toolbar class="md-hue-2 mdc-date-picker__current-day-of-week">
-        <span>{{ moment(selected.date).format('dddd') }}</span>
+        <span>{{ selected.date | date: 'EEEE' }}</span>
       </md-toolbar>
 
       <!-- Current date -->
       <md-toolbar class="mdc-date-picker__current-date">
-        <span>{{ moment(selected.date).format('MMM') }}</span>
-        <strong>{{ moment(selected.date).format('DD') }}</strong>
-        <a ng-click="displayYearSelection()">{{ moment(selected.date).format('YYYY') }}</a>
+        <span>{{ selected.date | date : 'MMMM' }}</span>
+        <strong>{{ selected.date | date: 'dd' }}</strong>
+        <a ng-click="displayYearSelection()">{{ selected.date | date: 'yyyy' }}</a>
       </md-toolbar>
 
       <!-- Calendar -->
