@@ -20,9 +20,9 @@
             <i class="mdi mdi-chevron-left"></i>
           </md-button>
 
-          <span>{{ activeDate.format('MMMM YYYY') }}</span>
+          <span>{{ activeDate | date: 'MMMM yyyy' }}</span>
 
-          <md-button class="md-fab md-primary" arial-label="Next month" ng-click="nextMonth()">
+          <md-button class="md-fab md-primary" aria-label="Next month" ng-click="nextMonth()">
             <i class="mdi mdi-chevron-right"></i>
           </md-button>
         </div>
@@ -39,7 +39,7 @@
                          ng-class="{ 'mdc-date-picker__day--is-selected': day.selected,
                                      'mdc-date-picker__day--is-today': day.today }"
                          ng-repeat="day in days">
-          <a ng-click="select(day)">{{ day ? day.format('D') : '' }}</a>
+          <a ng-click="select(day)">{{ day.date ? (day.date | date: 'dd') : '' }}</a>
         </div><!--
 
                  --><span class="mdc-date-picker__day mdc-date-picker__day--is-empty"

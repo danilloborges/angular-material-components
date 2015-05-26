@@ -21,18 +21,19 @@ angular.module('ngMaterial.components.datePicker', ['ngMaterial'])
 
         var activeLocale;
 
+        $scope.activeDate = new Date();
         this.build = function (locale) {
-          activeLocale = locale;
+          //activeLocale = locale;
 
-          moment.locale(activeLocale);
+          //moment.locale(activeLocale);
 
           if (angular.isDefined($scope.model)) {
             $scope.selected = {
-              model: moment($scope.model),
+              model: $scope.model,//moment($scope.model),
               date: $scope.model
             };
 
-            $scope.activeDate = moment($scope.model);
+            $scope.activeDate = $scope.model;
           }
           else {
             $scope.selected = {
@@ -40,10 +41,10 @@ angular.module('ngMaterial.components.datePicker', ['ngMaterial'])
               date: new Date()
             };
 
-            $scope.activeDate = moment();
+            $scope.activeDate = new Date();
           }
 
-          $scope.moment = moment;
+          //$scope.moment = moment;
 
           $scope.days = [];
           //TODO: Use moment locale to set first day of week properly.
@@ -58,7 +59,7 @@ angular.module('ngMaterial.components.datePicker', ['ngMaterial'])
 
           $scope.years = [];
 
-          for (var y = moment().year() - 100; y <= moment().year() + 100; y++) {
+          for (var y = $scope.activeDate.getFullYear() - 50; y <= $scope.activeDate.getFullYear() + 50; y++) {
             $scope.years.push(y);
           }
 
@@ -67,22 +68,22 @@ angular.module('ngMaterial.components.datePicker', ['ngMaterial'])
         this.build(checkLocale(locale));
 
         $scope.previousMonth = function () {
-          $scope.activeDate = $scope.activeDate.subtract(1, 'month');
+          $scope.activeDate = new Date($scope.activeDate.setMonth($scope.activeDate.getMonth()-1));//$scope.activeDate.subtract(1, 'month');
           generateCalendar();
         };
 
         $scope.nextMonth = function () {
-          $scope.activeDate = $scope.activeDate.add(1, 'month');
+          $scope.activeDate = new Date($scope.activeDate.setMonth($scope.activeDate.getMonth()+1));//$scope.activeDate.add(1, 'month');
           generateCalendar();
         };
 
         $scope.select = function (day) {
           $scope.selected = {
-            model: day.toDate(),
-            date: day.toDate()
+            model: day.date,
+            date: day.date
           };
 
-          $scope.model = day.toDate();
+          $scope.model = day.date;
 
           generateCalendar();
         };
@@ -90,10 +91,10 @@ angular.module('ngMaterial.components.datePicker', ['ngMaterial'])
         $scope.selectYear = function (year) {
           $scope.yearSelection = false;
 
-          $scope.selected.model = moment($scope.selected.date).year(year).toDate();
-          $scope.selected.date = moment($scope.selected.date).year(year).toDate();
-          $scope.model = moment($scope.selected.date).toDate();
-          $scope.activeDate = $scope.activeDate.add(year - $scope.activeDate.year(), 'year');
+          $scope.selected.model = $scope.selected.date.setFullYear(year);// moment($scope.selected.date).year(year).toDate();
+          $scope.selected.date =  $scope.selected.date.setFullYear(year);//moment($scope.selected.date).year(year).toDate();
+          $scope.model = $scope.model;// moment($scope.selected.date).toDate();
+          $scope.activeDate.setFullYear(year);// = $scope.activeDate.add(year - $scope.activeDate.year(), 'year');
 
           generateCalendar();
         };
@@ -112,32 +113,41 @@ angular.module('ngMaterial.components.datePicker', ['ngMaterial'])
 
         function generateCalendar() {
           var days = [],
-            previousDay = angular.copy($scope.activeDate).date(0),
-            firstDayOfMonth = angular.copy($scope.activeDate).date(1),
-            lastDayOfMonth = angular.copy(firstDayOfMonth).endOf('month'),
-            maxDays = angular.copy(lastDayOfMonth).date();
+            //previousDay = new Date($scope.activeDate.getFullYear(), $scope.activeDate.getMonth(), 0),//angular.copy($scope.activeDate).date(0),
+            firstDayOfMonth = new Date($scope.activeDate.getFullYear(), $scope.activeDate.getMonth(), 1),//angular.copy($scope.activeDate).date(1),
+            lastDayOfMonth =  new Date($scope.activeDate.getFullYear(), $scope.activeDate.getMonth()+1, 0), //angular.copy(firstDayOfMonth).endOf('month'),
+            maxDays = lastDayOfMonth.getUTCDate();//angular.copy(lastDayOfMonth).date();
 
           $scope.emptyFirstDays = [];
 
-          for (var i =  firstDayOfMonth.day(); i > 0; i--) {
-            $scope.emptyFirstDays.push({});
-          }
 
+              for (var i = firstDayOfMonth.getDay(); i > 0; i--) {
+                  $scope.emptyFirstDays.push({});
+              }
+
+          var each = firstDayOfMonth;
+            var today = new Date();
+            today.setHours(0, 0, 0, 0);
           for (var j = 0; j < maxDays; j++) {
-            var date = angular.copy(previousDay.add(1, 'days'));
 
-            date.selected = angular.isDefined($scope.selected.model) && date.isSame($scope.selected.date, 'day');
-            date.today = date.isSame(moment(), 'day');
+            var date = {};
+            date.date = each;
+            //date = angular.copy(previousDay.add(1, 'days'));
+
+            date.selected = each.getTime() === $scope.selected.date.getTime();//angular.isDefined($scope.selected.model) && date.isSame($scope.selected.date, 'day');
+            date.today = each.getTime() === today.getTime();//date.isSame(moment(), 'day');
 
             days.push(date);
+            each = new Date(each);
+            each = new Date(each.setDate(each.getDate() + 1));
           }
 
           $scope.emptyLastDays = [];
-
-          for (var k = 7 - (lastDayOfMonth.day() === 0 ? 7 : lastDayOfMonth.day()); k > 0; k--) {
-            $scope.emptyLastDays.push({});
-          }
-
+          //if(lastDayOfMonth.getDay() < 7 ) {
+              for (var k = lastDayOfMonth.getDay()+1; k < 7 ; k++) {
+                  $scope.emptyLastDays.push({});
+              }
+          //}
           $scope.days = days;
         }
 
