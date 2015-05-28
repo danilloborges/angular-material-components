@@ -2,15 +2,19 @@
     <!-- Date picker -->
     <div md-theme="{{mdTheme}}">
       <!-- Current day of week -->
-      <md-toolbar class="md-hue-2 mdc-date-picker__current-day-of-week">
+      <md-toolbar hide-sm class="md-hue-2 mdc-date-picker__current-day-of-week">
         <span>{{ selected.date | date: 'EEEE' }}</span>
       </md-toolbar>
 
       <!-- Current date -->
-      <md-toolbar class="mdc-date-picker__current-date">
+      <md-toolbar hide-sm class="mdc-date-picker__current-date">
         <span>{{ selected.date | date : 'MMMM' }}</span>
         <strong>{{ selected.date | date: 'dd' }}</strong>
         <a ng-click="displayYearSelection()">{{ selected.date | date: 'yyyy' }}</a>
+      </md-toolbar>
+      <md-toolbar hide show-sm class="mdc-date-picker__current-date">
+            <strong>{{ selected.date | date: 'dd' }}</strong>
+            <a ng-click="displayYearSelection()">{{ selected.date | date: 'MMMM yyyy' }}</a>
       </md-toolbar>
 
       <!-- Calendar -->
@@ -50,7 +54,7 @@
       <!-- Year selection -->
       <div class="mdc-date-picker__year-selector" ng-show="yearSelection">
         <a class="mdc-date-picker__year"
-           ng-class="{ 'mdc-date-picker__year--is-active': year == activeDate.format('YYYY') }"
+           ng-class="{ 'mdc-date-picker__year--is-active': year == (activeDate | date:'yyyy') }"
            ng-repeat="year in years"
            ng-click="selectYear(year)"
            ng-if="yearSelection">
@@ -59,8 +63,9 @@
       </div>
 
       <!-- Actions -->
-      <div class="md-actions mdc-date-picker__actions" layout="row" layout-align="end">
-        <md-button class="md-primary" ng-click="cancel()">Cancel</md-button>
+      <div class="md-actions mdc-date-picker__actions" layout="row" layout-align="end end">
+        <md-button class="md-primary" ng-click="select(today)">Hoje</md-button>
+        <md-button class="md-primary" ng-click="cancel()">Cancelar</md-button>
         <md-button class="md-primary" ng-click="closePicker()">Ok</md-button>
       </div>
     </div>

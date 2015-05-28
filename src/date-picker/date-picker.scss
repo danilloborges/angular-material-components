@@ -26,7 +26,7 @@
 
 // Date picker current date
 .mdc-date-picker__current-date {
-  padding: $base-spacing-unit 0;
+  padding: 4 0;
 
   span,
   strong,
@@ -47,7 +47,7 @@
   }
 
   strong {
-    @include font-size(60px);
+    @include font-size(50px);
     line-height: 1;
   }
 
@@ -175,7 +175,7 @@
 
 // Date picker actions
 .mdc-date-picker__actions {
-  padding: $base-spacing-unit;
+  padding: 4px $base-spacing-unit 4px $base-spacing-unit !important;
   border-top: 1px solid $black-4;
   text-align: center;
 }

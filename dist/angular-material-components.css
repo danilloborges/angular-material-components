@@ -12,7 +12,7 @@
   text-transform: capitalize; }
 
 .mdc-date-picker__current-date {
-  padding: 8px 0; }
+  padding: 4 0; }
   .mdc-date-picker__current-date span,
   .mdc-date-picker__current-date strong,
   .mdc-date-picker__current-date a {
@@ -27,8 +27,8 @@
   .mdc-date-picker__current-date span {
     text-transform: uppercase; }
   .mdc-date-picker__current-date strong {
-    font-size: 60px;
-    font-size: 3.75rem;
+    font-size: 50px;
+    font-size: 3.125rem;
     line-height: 1; }
   .mdc-date-picker__current-date a {
     cursor: pointer;
@@ -124,7 +124,7 @@
   color: #FFFFFF !important; }
 
 .mdc-date-picker__actions {
-  padding: 8px;
+  padding: 4px 8px 4px 8px !important;
   border-top: 1px solid rgba(0, 0, 0, 0.12);
   text-align: center; }
 

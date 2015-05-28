@@ -68,11 +68,13 @@ angular.module('ngMaterial.components.datePicker', ['ngMaterial'])
         this.build(checkLocale(locale));
 
         $scope.previousMonth = function () {
+          $scope.activeDate = new Date($scope.activeDate.getTime());
           $scope.activeDate = new Date($scope.activeDate.setMonth($scope.activeDate.getMonth()-1));//$scope.activeDate.subtract(1, 'month');
           generateCalendar();
         };
 
         $scope.nextMonth = function () {
+          $scope.activeDate = new Date($scope.activeDate.getTime());
           $scope.activeDate = new Date($scope.activeDate.setMonth($scope.activeDate.getMonth()+1));//$scope.activeDate.add(1, 'month');
           generateCalendar();
         };
@@ -84,6 +86,7 @@ angular.module('ngMaterial.components.datePicker', ['ngMaterial'])
           };
 
           $scope.model = day.date;
+          $scope.activeDate = day.date;
 
           generateCalendar();
         };
@@ -126,8 +129,9 @@ angular.module('ngMaterial.components.datePicker', ['ngMaterial'])
               }
 
           var each = firstDayOfMonth;
-            var today = new Date();
-            today.setHours(0, 0, 0, 0);
+          var today = new Date();
+          today.setHours(0, 0, 0, 0);
+          $scope.today = {}; $scope.today.date = today;
           for (var j = 0; j < maxDays; j++) {
 
             var date = {};
