@@ -36,7 +36,7 @@ gulp.task('build:js', ['templates'], function() {
 gulp.task('build:js-min', ['templates'], function() {
     return gulp.src(['./src/**/*.js', '.tmp/**/*.js'], {base: '.'})
         .pipe(buildJs())
-        .pipe($.uglify())
+        .pipe($.uglify({ mangle: false }))
         .pipe($.rename('angular-material-components.min.js'))
         .pipe($.sourcemaps.write())
         .pipe(gulp.dest('./dist/'));

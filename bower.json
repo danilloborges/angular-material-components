@@ -24,8 +24,7 @@
     "tests"
   ],
   "dependencies": {
-    "angular-material": "~0.7.1",
-    "moment": "~2.10.2",
+    "angular-material": "~0.9.5",
     "mdi": "~0.8.82-alpha"
   },
   "devDependencies": {

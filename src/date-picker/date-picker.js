@@ -167,7 +167,7 @@ angular.module('ngMaterial.components.datePicker', ['ngMaterial'])
 .controller('mdcDatePickerInputController', function ($scope, $attrs, $timeout, $filter, $mdDialog) {
     if (angular.isDefined($scope.model)) {
       $scope.selected = {
-        model: moment($scope.model),
+        model: $scope.model,
         date: $scope.model
       };
     }

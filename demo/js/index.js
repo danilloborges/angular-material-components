@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('demoApp', ['ngMaterial.components'])
+angular.module('demoApp', ['ngMaterial','ngMaterial.components'])
 .config(function($mdThemingProvider) {
   $mdThemingProvider.theme('datePickerTheme').primaryPalette('teal');
 })
