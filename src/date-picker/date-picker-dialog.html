@@ -43,8 +43,8 @@
                          ng-class="{ 'mdc-date-picker__day--is-selected': day.selected,
                                      'mdc-date-picker__day--is-today': day.today }"
                          ng-repeat="day in days">
-          <a ng-click="select(day)">{{ day.date ? (day.date | date: 'dd') : '' }}</a>
-        </div><!--
+                      <a ng-click="select(day)">{{ day.date ? (day.date | date: 'dd') : '' }}</a>
+                    </div><!--
 
                  --><span class="mdc-date-picker__day mdc-date-picker__day--is-empty"
                           ng-repeat="x in emptyLastDays">&nbsp;</span>

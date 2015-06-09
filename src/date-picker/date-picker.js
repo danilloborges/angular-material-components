@@ -200,12 +200,14 @@ angular.module('ngMaterial.components.datePicker', ['ngMaterial'])
   })
 .directive('mdcDatePicker', function () {
     return {
-      restrict: 'AE',
-      controller: 'mdcDatePickerInputController',
-      scope: {
-        model: '=',
-        label: '@'
-      },
-      templateUrl: 'date-picker/date-picker-input.html'
-    };
+        restrict: 'AE',
+        controller: 'mdcDatePickerInputController',
+        scope: {
+            model: '=',
+            label: '@'
+        },
+        templateUrl: function (elem, attr) {
+            return attr.mdTemplate ? attr.mdTemplate : 'date-picker/date-picker-input.html';
+        }
+    }
   });
